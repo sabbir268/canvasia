@@ -1,10 +1,10 @@
 <?php
-Router::get('/', function () {
+Router::create('/', function () {
     $gallary = new Gallery();
     $gallary->uploadImage($_FILES['image']);
 });
 
-Router::post('/', function () {
-    $gallary = new Gallery();
-    $gallary->uploadImage($_FILES['image']);
-});
+// Router::create('/', function () {
+//     $gallary = new Gallery();
+//     $gallary->uploadImage($_FILES['image']);
+// });

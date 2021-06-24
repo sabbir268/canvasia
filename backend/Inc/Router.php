@@ -4,25 +4,12 @@ class Router
 {
     public $routes;
     
-    public static function get($action, Closure $callback)
+    public static function create($action, Closure $callback)
     {
-        if ($_SERVER['REQUEST_METHOD'] != 'GET') {
-            echo "Wrong method";
-        // return ;
-        } else {
             self::route($action, $callback);
-        }
     }
 
-    public static function post($action, Closure $callback)
-    {
-        if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-            echo "Wrong method";
-        // return ;
-        } else {
-            self::route($action, $callback);
-        }
-    }
+  
 
     private static function route($action, Closure $callback)
     {
