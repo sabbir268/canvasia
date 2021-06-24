@@ -8,11 +8,18 @@ class Gallery
         $file_tmp =$_FILES['image']['tmp_name'];
         try {
             $mv =  move_uploaded_file($file_tmp, "Gallery/".$file_name);
-            var_dump($mv);
-            return 'success';
+            echo "Success";
         } catch (\Throwable $th) {
             var_dump($th);
             throw $th;
         }
+    }
+
+    public function getImages()
+    {
+        $path    = '/Gallary';
+        $files = scandir($path);
+        $files = json_encode($files);
+        echo $files;
     }
 }

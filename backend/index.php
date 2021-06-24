@@ -1,16 +1,12 @@
 <?php
+// error_reporting(0);
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
-require_once('gallery.php');
+require_once('Inc/Router.php');
+require_once('Controller/Gallery.php');
 
-$gallary = new Gallery();
 
-if (isset($_POST)) {
-    // var_dump($_FILES['image']);
-    $gallary->uploadImage($_FILES['image']);
-}
+require_once('Inc/Api.php');
 
-// if (isset($_GET)) {
-//     echo "Fuck";
-// }
+Router::dispatch($_SERVER['REQUEST_URI']);
