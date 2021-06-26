@@ -35,13 +35,25 @@ class Home extends Component {
     form.append("hello", "hola");
     console.log(form);
     axios
-      .post(`http://localhost:8888`, form, {
+      .post(`http://localhost:8888/upload`, form, {
         headers: { "Content-Type": "multipart/form-data" },
       })
-      .then((result) => console.log(result))
+      .then((result) => {
+        let files = [...this.state.files, result.data];
+        this.setState({ files });
+      })
       .catch((error) => console.log("error", error));
   };
 
+  componentDidMount() {
+    axios
+      .get(`http://localhost:8888/get-all`)
+      .then((result) => {
+        let files = [...this.state.files, ...result.data];
+        this.setState({ files });
+      })
+      .catch((error) => console.log("error", error));
+  }
   render() {
     return (
       <div>
@@ -58,13 +70,19 @@ class Home extends Component {
                 onDragLeave={this.dragLeave}
                 onDrop={this.fileDrop}
               >
-                {this.state.files.length > 0 ? (
-                  <ImageContainer></ImageContainer>
-                ) : (
-                  <div className="card-body h-100 text-center" id="dropZone">
-                    <span>Drag Image</span>
+                <div className="h-100">
+                  <div className="row m-2">
+                    {this.state.files.length > 0 ? (
+                      this.state.files.map((img) => {
+                        return <ImageContainer image={img}></ImageContainer>;
+                      })
+                    ) : (
+                      <div className="card-body text-center" id="dropZone">
+                        <span>Drag Image</span>
+                      </div>
+                    )}
                   </div>
-                )}
+                </div>
                 <div className="card-footer">
                   <div className="float-left mt-2">Upload Image</div>
                   <div className="float-right">

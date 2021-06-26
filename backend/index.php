@@ -7,6 +7,6 @@ require_once('Inc/Router.php');
 require_once('Controller/Gallery.php');
 
 
-require_once('Inc/Api.php');
+require_once('Api.php');
 
 Router::dispatch($_SERVER['REQUEST_URI']);

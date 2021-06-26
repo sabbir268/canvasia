@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <p>Image to use:</p>
+    <img id="scream" width="220" height="277" src="https://www.w3schools.com/tags/img_the_scream.jpg" alt="The Scream">
+
+    <p>Canvas:</p>
+    <canvas id="myCanvas" width="240" height="297" style="border:1px solid #d3d3d3;">
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>
+    <canvas id="myCanvas1" width="240" height="297" style="border:1px solid #d3d3d3;"></canvas>
+    </canvas>
+
+    <script>
+        window.onload = function() {
+            var c = document.getElementById("myCanvas");
+            var ctx = c.getContext("2d");
+            var img = document.getElementById("scream");
+            // for (var x = 0; x < image.width; x++) {
+            //     ctx.drawImage(image, x, 0, 1, image.height, image.width - x, 0, 1, image.height);
+            // }
+
+            var cs = document.getElementById("myCanvas1");
+            var ctx1 = cs.getContext("2d");
+
+            // for (var x = 0; x < image1.width; x++) {
+            //     ctx1.drawImage(image1, x, 0, 1, image1.height, image1.width - x, 0, 1, image1.height);
+            // }
+            ctx.save(); // Save the current state
+            ctx.scale(-1, 1); // Set scale to flip the image
+            ctx.drawImage(img, img.width * -1, 0, img.width, img.height); // draw the image
+            ctx.restore();
+
+            ctx1.save(); // Save the current state
+            ctx1.scale(1, -1); // Set scale to flip the image
+            ctx1.drawImage(img, 0, img.height * -1, img.width, img.height); // draw the image
+            ctx1.restore();
+
+
+        }
+    </script>
+
+</body>
+
+</html>
