@@ -6,6 +6,7 @@ import axios from "axios";
 class Home extends Component {
   state = {
     files: [],
+    singleFile: null,
   };
 
   dragOver = (e) => {
@@ -25,8 +26,10 @@ class Home extends Component {
     const files = e.dataTransfer.files;
 
     // const files = [...this.state.files, file];
-    // console.log(file, files);
-    this.uploadFileToServer(files[0]);
+    let image = URL.createObjectURL(files[0]);
+    this.setState({ singleFile: image });
+    console.log("file", image);
+    // this.uploadFileToServer(files[0]);
   };
 
   uploadFileToServer = (file) => {
@@ -45,15 +48,15 @@ class Home extends Component {
       .catch((error) => console.log("error", error));
   };
 
-  componentDidMount() {
-    axios
-      .get(`http://localhost:8888/get-all`)
-      .then((result) => {
-        let files = [...this.state.files, ...result.data];
-        this.setState({ files });
-      })
-      .catch((error) => console.log("error", error));
-  }
+  // componentDidMount() {
+  //   axios
+  //     .get(`http://localhost:8888/get-all`)
+  //     .then((result) => {
+  //       let files = [...this.state.files, ...result.data];
+  //       this.setState({ files });
+  //     })
+  //     .catch((error) => console.log("error", error));
+  // }
   render() {
     return (
       <div>
@@ -82,6 +85,7 @@ class Home extends Component {
                       </div>
                     )}
                   </div>
+                  <img src={this.state.singleFile} alt="" />
                 </div>
                 <div className="card-footer">
                   <div className="float-left mt-2">Upload Image</div>
